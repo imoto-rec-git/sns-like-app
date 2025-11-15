@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { ClockIcon, HeartIcon, MessageCircleIcon, Share2Icon } from "./Icons";
+import { ClockIcon } from "./Icons";
 import { PostInteraction } from "./PostInteraction";
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
     author: {
       name: string | null;
       username: string;
+      image: string | null;
     };
     createdAt: Date;
     likes: {
@@ -27,8 +28,11 @@ export const Post = ({ post }: Props) => {
       className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4"
     >
       <div className="flex items-center gap-4 mb-4">
-        <Avatar className="w-10 h-10">
-          <AvatarImage src="/placeholder-user.jpg" />
+        <Avatar className="w-10 h-10 rounded-br-full">
+          <AvatarImage
+            src={post.author.image || "/placeholder-user.jpg"}
+            className="rounded-full"
+          />
           <AvatarFallback>AC</AvatarFallback>
         </Avatar>
         <div>
@@ -40,7 +44,11 @@ export const Post = ({ post }: Props) => {
         <p>{post.content}</p>
       </div>
       <div className="flex items-center justify-between mt-4">
-        <PostInteraction />
+        <PostInteraction
+          postId={post.id}
+          initialLikes={post.likes.map((like) => like.userId)}
+          commentNumber={post._count.replies}
+        />
         <div className="flex items-center gap-2 text-muted-foreground">
           <ClockIcon className="h-5 w-5" />
           <span>{post.createdAt.toLocaleString()}</span>
