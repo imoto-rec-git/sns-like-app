@@ -108,3 +108,42 @@ export const likeAction = async (postId: string) => {
     console.error(error);
   }
 };
+
+export const followAction = async (userId: string) => {
+  const { userId: currentUserId } = auth();
+  if (!currentUserId) {
+    throw new Error("ユーザーが存在しません");
+  }
+  try {
+    // unfollow
+    const existingFollow = await prisma.follow.findFirst({
+      where: {
+        followerId: currentUserId,
+        followingId: userId,
+      },
+    });
+
+    if (existingFollow) {
+      await prisma.follow.delete({
+        where: {
+          followerId_followingId: {
+            followerId: currentUserId,
+            followingId: userId,
+          },
+        },
+      });
+    } else {
+      // follow
+      await prisma.follow.create({
+        data: {
+          followerId: currentUserId,
+          followingId: userId,
+        },
+      });
+    }
+
+    revalidatePath(`/profile/${userId}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
