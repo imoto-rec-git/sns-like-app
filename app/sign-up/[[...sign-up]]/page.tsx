@@ -1,9 +1,9 @@
-import { SignUp } from '@clerk/nextjs'
+import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {
   return (
     <div className="flex justify-center items-center h-[calc(100vh-96px)]">
-        <SignUp />
+      <SignUp />
     </div>
-  )
+  );
 }

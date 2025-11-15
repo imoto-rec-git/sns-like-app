@@ -1,14 +1,15 @@
 # SNS-like App
 
-Next.js App Router、Prisma、Clerkを使用したSNSライクなWebアプリケーションです。学習目的で作成しました。
+Next.js App Router、Supabase、Prisma、Clerkを使用したSNSライクなWebアプリケーションです。
 
 ## 📝 プロジェクト概要
 
-このプロジェクトは、モダンなWebアプリケーション開発技術を学習するために作成したTwitter/X風のSNSアプリケーションです。サーバーコンポーネントとクライアントコンポーネントの使い分け、Server Actions、認証フロー、データベース設計などを実践的に学ぶことができます。
+このプロジェクトは、モダンなWebアプリケーション開発技術を学習するために作成したSNSアプリケーションです。サーバーコンポーネントとクライアントコンポーネントの使い分け、Server Actions、認証フロー、データベース設計などを実践的に学ぶことができます。
 
 ## ✨ 主な機能
 
 ### 実装済み機能
+
 - 🔐 **認証機能**
   - Clerkによるユーザー認証
   - サインアップ・サインイン
@@ -24,6 +25,7 @@ Next.js App Router、Prisma、Clerkを使用したSNSライクなWebアプリケ
   - ユーザー情報の表示
 
 ### データモデル
+
 - **User**: ユーザー情報（Clerk IDと連携）
 - **Post**: 投稿情報
 - **Like**: いいね機能
@@ -33,6 +35,7 @@ Next.js App Router、Prisma、Clerkを使用したSNSライクなWebアプリケ
 ## 🛠️ 技術スタック
 
 ### フロントエンド
+
 - **[Next.js](https://nextjs.org/)** (v14.2.4) - App Routerを使用したReactフレームワーク
 - **[React](https://react.dev/)** (v18) - UIライブラリ
 - **[TypeScript](https://www.typescriptlang.org/)** (v5) - 型安全な開発
@@ -41,18 +44,21 @@ Next.js App Router、Prisma、Clerkを使用したSNSライクなWebアプリケ
 - **[Lucide React](https://lucide.dev/)** - アイコンライブラリ
 
 ### バックエンド
+
 - **[Prisma](https://www.prisma.io/)** (v5.16.1) - 次世代のNode.js/TypeScript ORM
 - **[PostgreSQL](https://www.postgresql.org/)** - データベース
 - **[Clerk](https://clerk.com/)** (@clerk/nextjs v5.1.6) - 認証・ユーザー管理サービス
 - **[Zod](https://zod.dev/)** (v3.23.8) - スキーマバリデーション
 
 ### その他
+
 - **[class-variance-authority](https://cva.style/docs)** - バリアントベースのスタイリング
 - **[clsx](https://github.com/lukeed/clsx)** & **[tailwind-merge](https://github.com/dcastil/tailwind-merge)** - クラス名の結合・マージ
 
 ## 🚀 セットアップ手順
 
 ### 前提条件
+
 - Node.js 20.15.1 以上
 - pnpm（推奨）
 - PostgreSQLデータベース
@@ -80,6 +86,7 @@ cp .env.example .env
 ```
 
 必要な環境変数：
+
 ```env
 # Database
 DATABASE_URL="postgresql://..."
@@ -153,26 +160,31 @@ sns-like-app/
 このプロジェクトで学べる主要な技術概念：
 
 ### 1. Next.js App Router
+
 - サーバーコンポーネントとクライアントコンポーネントの使い分け
 - `use client`ディレクティブの適切な配置
 - Server Actionsによるフォーム処理
 
 ### 2. Server Actions
+
 - `'use server'`を使用したサーバーサイド処理
 - `useFormState`によるフォーム状態管理
 - `revalidatePath`によるキャッシュ更新
 
 ### 3. Prisma ORM
+
 - リレーショナルデータベースのスキーマ設計
 - マイグレーション管理
 - 型安全なデータベースクエリ
 
 ### 4. Clerk認証
+
 - ドロップイン認証コンポーネント
 - Middlewareによる保護されたルート
 - Webhookによるユーザーデータ同期
 
 ### 5. TypeScript
+
 - 型安全な開発環境
 - インターフェースとType定義
 - Zodによる実行時バリデーション

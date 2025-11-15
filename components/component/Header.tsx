@@ -29,14 +29,16 @@ export default function Header() {
             <MailIcon className="h-6 w-6 text-muted-foreground" />
           </Link>
 
-            <div>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-              <SignedOut>
-                <Link className="w-20 inline-block" href="/sign-in">ログイン</Link>
-              </SignedOut>
-            </div>
+          <div>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <Link className="w-20 inline-block" href="/sign-in">
+                ログイン
+              </Link>
+            </SignedOut>
+          </div>
         </div>
       </div>
     </header>

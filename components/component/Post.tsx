@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import { ClockIcon, HeartIcon, MessageCircleIcon, Share2Icon } from "./Icons"
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { ClockIcon, HeartIcon, MessageCircleIcon, Share2Icon } from "./Icons";
 import { PostInteraction } from "./PostInteraction";
 
 type Props = {
@@ -20,33 +20,33 @@ type Props = {
   };
 };
 
-export const Post = ({post}: Props) => {
+export const Post = ({ post }: Props) => {
   return (
     <div
-    key={post.id}
-    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4"
-  >
-    <div className="flex items-center gap-4 mb-4">
-      <Avatar className="w-10 h-10">
-        <AvatarImage src="/placeholder-user.jpg" />
-        <AvatarFallback>AC</AvatarFallback>
-      </Avatar>
-      <div>
-        <h3 className="text-lg font-bold">{post.author.name}</h3>
-        <p className="text-muted-foreground">{post.author.username}</p>
+      key={post.id}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4"
+    >
+      <div className="flex items-center gap-4 mb-4">
+        <Avatar className="w-10 h-10">
+          <AvatarImage src="/placeholder-user.jpg" />
+          <AvatarFallback>AC</AvatarFallback>
+        </Avatar>
+        <div>
+          <h3 className="text-lg font-bold">{post.author.name}</h3>
+          <p className="text-muted-foreground">{post.author.username}</p>
+        </div>
       </div>
-    </div>
-    <div className="space-y-2">
-      <p>{post.content}</p>
-    </div>
-    <div className="flex items-center justify-between mt-4">
-			<PostInteraction />
-      <div className="flex items-center gap-2 text-muted-foreground">
-        <ClockIcon className="h-5 w-5" />
-        <span>{post.createdAt.toLocaleString()}</span>
+      <div className="space-y-2">
+        <p>{post.content}</p>
       </div>
-    </div>
-    {/* {post.comments && (
+      <div className="flex items-center justify-between mt-4">
+        <PostInteraction />
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <ClockIcon className="h-5 w-5" />
+          <span>{post.createdAt.toLocaleString()}</span>
+        </div>
+      </div>
+      {/* {post.comments && (
       <div className="mt-4 border-t pt-4 space-y-2">
         {post.comments.map((comment, index) => (
           <div key={index} className="flex items-center gap-4">
@@ -65,6 +65,6 @@ export const Post = ({post}: Props) => {
         ))}
       </div>
     )} */}
-  </div>
-  )
-}
+    </div>
+  );
+};
