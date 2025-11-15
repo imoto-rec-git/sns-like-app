@@ -53,12 +53,32 @@ export async function POST(req: Request) {
 
   if (eventType === "user.created") {
     try {
+      const userData = JSON.parse(body).data;
+
+      // usernameがnullの場合、代替値を生成
+      let username = userData.username;
+      if (!username) {
+        // first_nameとlast_nameがある場合はそれを使用、なければユーザーIDの一部を使用
+        if (userData.first_name && userData.last_name) {
+          username = `${userData.first_name.toLowerCase()}_${userData.last_name.toLowerCase()}`;
+        } else if (userData.first_name) {
+          username = userData.first_name.toLowerCase();
+        } else {
+          // ユーザーIDの最後の8文字を使用
+          username = `user_${evt.data.id.slice(-8)}`;
+        }
+      }
+
       await prisma.user.create({
         data: {
           id: evt.data.id,
           clerkId: evt.data.id,
-          username: JSON.parse(body).data.username,
-          image: JSON.parse(body).data.image_url,
+          username: username,
+          name:
+            userData.first_name && userData.last_name
+              ? `${userData.first_name} ${userData.last_name}`
+              : userData.first_name || null,
+          image: userData.image_url || null,
         },
       });
 
@@ -73,15 +93,37 @@ export async function POST(req: Request) {
 
   if (eventType === "user.updated") {
     try {
+      const userData = JSON.parse(body).data;
+
+      // usernameがnullの場合、既存のusernameを保持するため更新しない
+      const updateData: {
+        clerkId: string;
+        username?: string;
+        name?: string | null;
+        image?: string | null;
+      } = {
+        clerkId: evt.data.id,
+      };
+
+      if (userData.username) {
+        updateData.username = userData.username;
+      }
+
+      if (userData.first_name && userData.last_name) {
+        updateData.name = `${userData.first_name} ${userData.last_name}`;
+      } else if (userData.first_name) {
+        updateData.name = userData.first_name;
+      }
+
+      if (userData.image_url) {
+        updateData.image = userData.image_url;
+      }
+
       await prisma.user.update({
         where: {
           id: evt.data.id,
         },
-        data: {
-          clerkId: evt.data.id,
-          username: JSON.parse(body).data.username,
-          image: JSON.parse(body).data.image_url,
-        },
+        data: updateData,
       });
 
       return new Response("ユーザー更新に成功しました。", { status: 200 });
