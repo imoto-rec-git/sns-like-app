@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -8,14 +8,14 @@ import SubmitButton from "./SubmitButton";
 import { useFormState } from "react-dom";
 
 export default function PostForm() {
-  const initialState ={
+  const initialState = {
     error: undefined,
     success: false,
-  }
+  };
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction] = useFormState(addPostAction, initialState)
+  const [state, formAction] = useFormState(addPostAction, initialState);
 
-  if(state.success && formRef.current) {
+  if (state.success && formRef.current) {
     formRef.current.reset();
   }
 
@@ -45,9 +45,7 @@ export default function PostForm() {
           <SubmitButton />
         </form>
       </div>
-      {state.error && (
-        <p className="text-destructive ml-14">{state.error}</p>
-      )}
+      {state.error && <p className="text-destructive ml-14">{state.error}</p>}
     </div>
   );
 }

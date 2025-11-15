@@ -1,27 +1,27 @@
 import prisma from "./prisma";
 
 export async function postDataFetcher(userId: string) {
-	return await prisma.post.findMany({
+  return await prisma.post.findMany({
     where: {
-        authorId: {
+      authorId: {
         in: [userId],
-        }
+      },
     },
     include: {
-        author: true,
-        likes: {
+      author: true,
+      likes: {
         select: {
-            userId: true,
-        }
+          userId: true,
         },
-        _count: {
+      },
+      _count: {
         select: {
-            replies: true,
-        }
-        }
+          replies: true,
+        },
+      },
     },
     orderBy: {
-        createdAt: "desc",
-    }
-    });
+      createdAt: "desc",
+    },
+  });
 }
